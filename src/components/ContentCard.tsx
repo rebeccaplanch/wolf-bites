@@ -25,7 +25,7 @@ export default function ContentCard({ item }: ContentCardProps) {
       rel="noopener noreferrer"
       className="block bg-white rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all duration-200 overflow-hidden touch-manipulation"
     >
-      <div className="p-4 sm:p-6" style={{ fontFamily: '"Source Sans 3", sans-serif' }}>
+      <div className="p-4 sm:p-6" style={{ fontFamily: '"Figtree", sans-serif' }}>
         {/* Top section with thumbnail and content */}
         <div className="flex gap-3 sm:gap-4 mb-4 sm:mb-6">
           {/* Thumbnail */}
