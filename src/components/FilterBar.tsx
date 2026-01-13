@@ -1,7 +1,7 @@
 'use client';
 
 import { SportType, ContentSource } from '@/types';
-import { Football, Basketball, Trophy, Youtube, Twitter, Mic, Grid } from 'lucide-react';
+import { Trophy, CircleDot, Disc, Youtube, Twitter, Mic, Grid } from 'lucide-react';
 
 interface FilterBarProps {
   selectedSport: SportType | 'all';
@@ -12,9 +12,9 @@ interface FilterBarProps {
 
 const sports: Array<{ value: SportType | 'all'; label: string; icon: any }> = [
   { value: 'all', label: 'All Sports', icon: Grid },
-  { value: 'football', label: 'Football', icon: Football },
-  { value: 'basketball', label: 'Basketball', icon: Basketball },
-  { value: 'baseball', label: Trophy },
+  { value: 'football', label: 'Football', icon: Trophy },
+  { value: 'basketball', label: 'Basketball', icon: CircleDot },
+  { value: 'baseball', label: 'Baseball', icon: Disc },
 ];
 
 const sources: Array<{ value: ContentSource | 'all'; label: string; icon: any }> = [
