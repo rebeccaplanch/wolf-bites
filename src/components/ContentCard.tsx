@@ -46,7 +46,7 @@ export default function ContentCard({ item }: ContentCardProps) {
 
             {/* Description */}
             {item.description && (
-              <p className="text-xs sm:text-sm text-gray-600 line-clamp-2 leading-relaxed">
+              <p className="text-xs sm:text-sm text-gray-600 line-clamp-2 leading-snug">
                 {item.description}
               </p>
             )}
@@ -58,7 +58,7 @@ export default function ContentCard({ item }: ContentCardProps) {
 
         {/* Author and Timestamp - Full Width */}
         <div className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">
-          <div className="truncate">by {item.author}</div>
+          <div className="truncate font-medium">by {item.author}</div>
           <div style={{ fontFamily: '"Roboto Mono", monospace' }}>
             {formatDistanceToNow(item.publishedAt, { addSuffix: true })}
           </div>
