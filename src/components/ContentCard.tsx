@@ -26,32 +26,46 @@ export default function ContentCard({ item }: ContentCardProps) {
       className="block bg-white rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all duration-200 overflow-hidden touch-manipulation"
     >
       <div className="p-4 sm:p-6">
-        {/* Source Badge */}
-        <div className="flex items-center gap-2 mb-3 sm:mb-4">
-          <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] sm:text-xs font-medium ${sourceColors[item.source]}`}>
-            <span className="material-symbols-outlined text-xs sm:text-sm">{sourceIcon}</span>
-            {item.source === 'youtube' ? 'YouTube' : 'Podcast'}
-          </span>
-        </div>
+        <div className="flex gap-3 sm:gap-4">
+          {/* Thumbnail */}
+          {item.thumbnail && (
+            <img
+              src={item.thumbnail}
+              alt={item.title}
+              className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-lg flex-shrink-0"
+            />
+          )}
 
-        {/* Title */}
-        <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3 line-clamp-2 leading-snug">
-          {item.title}
-        </h3>
+          {/* Content */}
+          <div className="flex-1 min-w-0">
+            {/* Source Badge */}
+            <div className="flex items-center gap-2 mb-2 sm:mb-3">
+              <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] sm:text-xs font-medium ${sourceColors[item.source]}`}>
+                <span className="material-symbols-outlined text-xs sm:text-sm">{sourceIcon}</span>
+                {item.source === 'youtube' ? 'YouTube' : 'Podcast'}
+              </span>
+            </div>
 
-        {/* Description */}
-        {item.description && (
-          <p className="text-[10px] sm:text-sm text-gray-600 mb-4 sm:mb-6 line-clamp-2 leading-relaxed">
-            {item.description}
-          </p>
-        )}
+            {/* Title */}
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3 line-clamp-2 leading-snug">
+              {item.title}
+            </h3>
 
-        {/* Divider */}
-        <div className="border-t border-gray-100 mb-3 sm:mb-4"></div>
+            {/* Description */}
+            {item.description && (
+              <p className="text-[10px] sm:text-sm text-gray-600 mb-4 sm:mb-6 line-clamp-2 leading-relaxed">
+                {item.description}
+              </p>
+            )}
 
-        {/* Author and Timestamp */}
-        <div className="flex items-center justify-between text-[10px] sm:text-xs text-gray-500">
-          <span className="truncate">{formatDistanceToNow(item.publishedAt, { addSuffix: true })} by {item.author}</span>
+            {/* Divider */}
+            <div className="border-t border-gray-100 mb-3 sm:mb-4"></div>
+
+            {/* Author and Timestamp */}
+            <div className="flex items-center justify-between text-[10px] sm:text-xs text-gray-500">
+              <span className="truncate">{formatDistanceToNow(item.publishedAt, { addSuffix: true })} by {item.author}</span>
+            </div>
+          </div>
         </div>
       </div>
     </a>
