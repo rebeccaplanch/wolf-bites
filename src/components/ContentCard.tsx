@@ -57,9 +57,9 @@ export default function ContentCard({ item }: ContentCardProps) {
         <div className="border-t border-gray-100 mb-3 sm:mb-4"></div>
 
         {/* Author and Timestamp - Full Width */}
-        <div className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4" style={{ fontFamily: '"Roboto Mono", monospace' }}>
+        <div className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">
           <div className="truncate">by {item.author}</div>
-          <div>
+          <div style={{ fontFamily: '"Roboto Mono", monospace' }}>
             {formatDistanceToNow(item.publishedAt, { addSuffix: true })}
           </div>
         </div>
