@@ -43,11 +43,13 @@ export async function fetchYouTubeVideos(
     });
 
     if (!response.ok) {
-      console.error(`YouTube API error: ${response.status}`);
+      const errorText = await response.text();
+      console.error(`YouTube API error: ${response.status}`, errorText);
       return [];
     }
 
     const data = await response.json();
+    console.log(`YouTube: Fetched ${data.items?.length || 0} videos from ${channel.name}`);
 
     return (data.items || []).map((item: YouTubeVideo) => ({
       id: `youtube-${item.id.videoId}`,

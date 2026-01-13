@@ -11,6 +11,7 @@ export async function fetchPodcastEpisodes(
   maxResults: number = 10
 ): Promise<ContentItem[]> {
   try {
+    console.log(`Fetching podcast: ${podcast.name} from ${podcast.url}`);
     const feed = await parser.parseURL(podcast.url);
 
     const items = feed.items
@@ -27,6 +28,7 @@ export async function fetchPodcastEpisodes(
         sport: podcast.sport,
       }));
 
+    console.log(`Podcast: Fetched ${items.length} episodes from ${podcast.name}`);
     return items;
   } catch (error) {
     console.error(`Error fetching podcast ${podcast.name}:`, error);
