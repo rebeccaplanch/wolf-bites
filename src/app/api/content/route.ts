@@ -3,7 +3,6 @@ import { sources } from '@/config/sources';
 import { fetchAllYouTubeVideos } from '@/lib/youtube';
 import { fetchAllTweets } from '@/lib/twitter';
 import { fetchAllPodcasts } from '@/lib/podcasts';
-import { SportType } from '@/types';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -11,10 +10,9 @@ export const revalidate = 0;
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
-    const sport = searchParams.get('sport') as SportType | null;
     const sourceType = searchParams.get('source');
 
-    console.log(`[API] Fetching content - Sport: ${sport || 'all'}, Source: ${sourceType || 'all'}`);
+    console.log(`[API] Fetching content - Source: ${sourceType || 'all'}`);
     
     // Check environment variables
     const youtubeApiKey = process.env.YOUTUBE_API_KEY;
@@ -23,16 +21,16 @@ export async function GET(request: NextRequest) {
       console.warn('[API] WARNING: YOUTUBE_API_KEY is not set in environment variables');
     }
 
-    // Fetch from all sources in parallel
+    // Fetch from all sources in parallel (no sport filtering)
     const [youtubeContent, twitterContent, podcastContent] = await Promise.all([
       !sourceType || sourceType === 'youtube'
-        ? fetchAllYouTubeVideos(sources.youtube, sport || undefined)
+        ? fetchAllYouTubeVideos(sources.youtube)
         : [],
       !sourceType || sourceType === 'twitter'
-        ? fetchAllTweets(sources.twitter, sport || undefined)
+        ? fetchAllTweets(sources.twitter)
         : [],
       !sourceType || sourceType === 'podcast'
-        ? fetchAllPodcasts(sources.podcasts, sport || undefined)
+        ? fetchAllPodcasts(sources.podcasts)
         : [],
     ]);
 

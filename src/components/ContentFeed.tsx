@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ContentItem, SportType, ContentSource } from '@/types';
+import { ContentItem, ContentSource } from '@/types';
 import ContentCard from './ContentCard';
 import FilterBar from './FilterBar';
 import { RefreshCw, AlertCircle } from 'lucide-react';
@@ -10,7 +10,6 @@ export default function ContentFeed() {
   const [items, setItems] = useState<ContentItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedSport, setSelectedSport] = useState<SportType | 'all'>('all');
   const [selectedSource, setSelectedSource] = useState<ContentSource | 'all'>('all');
   const [refreshing, setRefreshing] = useState(false);
 
@@ -18,7 +17,6 @@ export default function ContentFeed() {
     try {
       setError(null);
       const params = new URLSearchParams();
-      if (selectedSport !== 'all') params.append('sport', selectedSport);
       if (selectedSource !== 'all') params.append('source', selectedSource);
 
       console.log('[Frontend] Fetching content from:', `/api/content?${params.toString()}`);
@@ -74,7 +72,7 @@ export default function ContentFeed() {
 
   useEffect(() => {
     fetchContent();
-  }, [selectedSport, selectedSource]);
+  }, [selectedSource]);
 
   const handleRefresh = () => {
     setRefreshing(true);
@@ -107,9 +105,7 @@ export default function ContentFeed() {
 
       {/* Filters */}
       <FilterBar
-        selectedSport={selectedSport}
         selectedSource={selectedSource}
-        onSportChange={setSelectedSport}
         onSourceChange={setSelectedSource}
       />
 

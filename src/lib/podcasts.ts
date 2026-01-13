@@ -1,5 +1,6 @@
 import Parser from 'rss-parser';
 import { ContentItem, PodcastFeed, SportType } from '@/types';
+import { decodeHtmlEntities } from './utils';
 
 const parser = new Parser();
 
@@ -18,11 +19,11 @@ export async function fetchPodcastEpisodes(
       .slice(0, maxResults)
       .map((item) => ({
         id: `podcast-${item.guid || item.link}`,
-        title: item.title || 'Untitled Episode',
-        description: item.contentSnippet || item.content,
+        title: decodeHtmlEntities(item.title || 'Untitled Episode'),
+        description: decodeHtmlEntities(item.contentSnippet || item.content || ''),
         url: item.link || podcast.url,
         thumbnail: item.itunes?.image || feed.image?.url,
-        author: feed.title || podcast.name,
+        author: decodeHtmlEntities(feed.title || podcast.name),
         publishedAt: item.pubDate ? new Date(item.pubDate) : new Date(),
         source: 'podcast' as const,
         sport: podcast.sport,

@@ -1,4 +1,5 @@
 import { ContentItem, YouTubeChannel, SportType } from '@/types';
+import { decodeHtmlEntities } from './utils';
 
 const YOUTUBE_API_BASE = 'https://www.googleapis.com/youtube/v3';
 
@@ -84,11 +85,11 @@ export async function fetchYouTubeVideos(
 
     return (data.items || []).map((item: YouTubeVideo) => ({
       id: `youtube-${item.id.videoId}`,
-      title: item.snippet.title,
-      description: item.snippet.description,
+      title: decodeHtmlEntities(item.snippet.title),
+      description: decodeHtmlEntities(item.snippet.description || ''),
       url: `https://www.youtube.com/watch?v=${item.id.videoId}`,
       thumbnail: item.snippet.thumbnails.medium.url,
-      author: item.snippet.channelTitle,
+      author: decodeHtmlEntities(item.snippet.channelTitle),
       publishedAt: new Date(item.snippet.publishedAt),
       source: 'youtube' as const,
       sport: channel.sport,

@@ -1,4 +1,5 @@
 import { ContentItem, TwitterAccount, SportType } from '@/types';
+import { decodeHtmlEntities } from './utils';
 
 const TWITTER_API_BASE = 'https://api.twitter.com/2';
 
@@ -91,10 +92,10 @@ export async function fetchTweets(
 
       return {
         id: `twitter-${tweet.id}`,
-        title: tweet.text.substring(0, 100) + (tweet.text.length > 100 ? '...' : ''),
-        description: tweet.text,
+        title: decodeHtmlEntities(tweet.text.substring(0, 100) + (tweet.text.length > 100 ? '...' : '')),
+        description: decodeHtmlEntities(tweet.text),
         url: `https://twitter.com/${account.username}/status/${tweet.id}`,
-        author: author?.name || account.name,
+        author: decodeHtmlEntities(author?.name || account.name),
         publishedAt: new Date(tweet.created_at),
         source: 'twitter' as const,
         sport: account.sport,
