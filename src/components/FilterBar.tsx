@@ -37,7 +37,7 @@ export default function FilterBar({
               <span className="material-symbols-outlined text-sm sm:text-base">{icon}</span>
               <span className="hidden sm:inline">{label}</span>
               <span className="sm:hidden">
-                {value === 'all' ? 'All' : value === 'youtube' ? 'YT' : 'Pod'}
+                {value === 'all' ? 'All' : value === 'youtube' ? 'YouTube' : 'Podcast'}
               </span>
             </button>
           ))}
