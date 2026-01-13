@@ -24,38 +24,39 @@ export default function ContentCard({ item }: ContentCardProps) {
       href={item.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="block bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-200 overflow-hidden"
+      className="block bg-white rounded-lg shadow-md hover:shadow-xl active:shadow-lg transition-shadow duration-200 overflow-hidden touch-manipulation"
     >
-      <div className="p-4">
-        <div className="flex items-start gap-3">
+      <div className="p-3 sm:p-4">
+        <div className="flex items-start gap-2 sm:gap-3">
           {item.thumbnail && (
             <img
               src={item.thumbnail}
               alt={item.title}
-              className="w-24 h-24 object-cover rounded-lg flex-shrink-0"
+              className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 object-cover rounded-lg flex-shrink-0"
             />
           )}
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-2">
-              <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${sourceColors[item.source]}`}>
-                <SourceIcon size={12} />
-                {item.source}
+            <div className="flex items-center gap-2 mb-1.5 sm:mb-2">
+              <span className={`inline-flex items-center gap-1 px-2 py-0.5 sm:py-1 rounded-full text-xs font-medium ${sourceColors[item.source]}`}>
+                <SourceIcon size={10} className="sm:w-3 sm:h-3" />
+                <span className="hidden sm:inline">{item.source}</span>
+                <span className="sm:hidden">{item.source === 'youtube' ? 'YT' : 'Pod'}</span>
               </span>
             </div>
-            <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2">
+            <h3 className="font-semibold text-sm sm:text-base text-gray-900 mb-1 line-clamp-2 leading-tight">
               {item.title}
             </h3>
             {item.description && (
-              <p className="text-sm text-gray-600 mb-2 line-clamp-2">
+              <p className="text-xs sm:text-sm text-gray-600 mb-2 line-clamp-2 leading-snug">
                 {item.description}
               </p>
             )}
-            <div className="flex items-center justify-between text-xs text-gray-500">
-              <span>{item.author}</span>
-              <span>{formatDistanceToNow(item.publishedAt, { addSuffix: true })}</span>
+            <div className="flex items-center justify-between text-xs text-gray-500 flex-wrap gap-1">
+              <span className="truncate max-w-[50%]">{item.author}</span>
+              <span className="flex-shrink-0">{formatDistanceToNow(item.publishedAt, { addSuffix: true })}</span>
             </div>
           </div>
-          <ExternalLink size={16} className="text-gray-400 flex-shrink-0" />
+          <ExternalLink size={14} className="text-gray-400 flex-shrink-0 sm:w-4 sm:h-4" />
         </div>
       </div>
     </a>

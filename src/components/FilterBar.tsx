@@ -19,9 +19,9 @@ export default function FilterBar({
   onSourceChange,
 }: FilterBarProps) {
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 mb-6">
+    <div className="bg-white rounded-lg shadow-md p-3 sm:p-4 mb-4 sm:mb-6">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
           Source
         </label>
         <div className="flex flex-wrap gap-2">
@@ -29,14 +29,17 @@ export default function FilterBar({
             <button
               key={value}
               onClick={() => onSourceChange(value)}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors touch-manipulation active:scale-95 ${
                 selectedSource === value
                   ? 'bg-ncstate-red text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-700 active:bg-gray-200'
               }`}
             >
-              <Icon size={16} />
-              {label}
+              <Icon size={14} className="sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">{label}</span>
+              <span className="sm:hidden">
+                {value === 'all' ? 'All' : value === 'youtube' ? 'YT' : 'Pod'}
+              </span>
             </button>
           ))}
         </div>

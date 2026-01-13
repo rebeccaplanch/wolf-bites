@@ -82,24 +82,25 @@ export default function ContentFeed() {
   const filteredItems = items;
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
       {/* Header */}
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8 gap-4">
         <div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-1 sm:mb-2">
             Wolf Bites
           </h1>
-          <p className="text-lg text-gray-600">
+          <p className="text-sm sm:text-base lg:text-lg text-gray-600">
             Your NC State Sports News Hub
           </p>
         </div>
         <button
           onClick={handleRefresh}
           disabled={refreshing}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-ncstate-red text-white rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-ncstate-red text-white rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm sm:text-base w-full sm:w-auto"
         >
           <RefreshCw size={16} className={refreshing ? 'animate-spin' : ''} />
-          {refreshing ? 'Refreshing...' : 'Refresh'}
+          <span className="sm:hidden">{refreshing ? '...' : 'Refresh'}</span>
+          <span className="hidden sm:inline">{refreshing ? 'Refreshing...' : 'Refresh'}</span>
         </button>
       </div>
 
@@ -111,9 +112,9 @@ export default function ContentFeed() {
 
       {/* Loading State */}
       {loading && (
-        <div className="flex items-center justify-center py-12">
-          <RefreshCw className="animate-spin text-ncstate-red" size={32} />
-          <span className="ml-3 text-gray-600">Loading content...</span>
+        <div className="flex items-center justify-center py-8 sm:py-12">
+          <RefreshCw className="animate-spin text-ncstate-red" size={24} />
+          <span className="ml-3 text-sm sm:text-base text-gray-600">Loading content...</span>
         </div>
       )}
 
@@ -138,10 +139,10 @@ export default function ContentFeed() {
             </div>
           ) : (
             <>
-              <div className="mb-4 text-sm text-gray-600">
+              <div className="mb-4 text-xs sm:text-sm text-gray-600">
                 Showing {filteredItems.length} item{filteredItems.length !== 1 ? 's' : ''}
               </div>
-              <div className="grid gap-4">
+              <div className="grid gap-3 sm:gap-4">
                 {filteredItems.map((item) => (
                   <ContentCard key={item.id} item={item} />
                 ))}
