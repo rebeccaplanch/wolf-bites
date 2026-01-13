@@ -53,12 +53,14 @@ export const sources: SourcesConfig = {
       url: 'https://feeds.megaphone.fm/pack-pride',
       name: 'Pack Power - NC State Wolfpack Podcasts on 247Sports',
       sport: 'football',
+      applePodcastsUrl: 'https://podcasts.apple.com/us/podcast/pack-power-nc-state-wolfpack-podcast-on-247sports/id1845447455',
     },
     // Inside Pack Sports Live
     {
       url: 'https://rss.libsyn.com/shows/102525/destinations/544501.xml',
       name: 'Inside Pack Sports Live',
       sport: 'football',
+      applePodcastsUrl: 'https://podcasts.apple.com/us/podcast/inside-pack-sports-live/id1266096331',
     },
   ],
 };

@@ -17,17 +17,36 @@ export async function fetchPodcastEpisodes(
 
     const items = feed.items
       .slice(0, maxResults)
-      .map((item) => ({
-        id: `podcast-${item.guid || item.link}`,
-        title: decodeHtmlEntities(item.title || 'Untitled Episode'),
-        description: decodeHtmlEntities(item.contentSnippet || item.content || ''),
-        url: item.link || podcast.url,
-        thumbnail: item.itunes?.image || feed.image?.url,
-        author: decodeHtmlEntities(feed.title || podcast.name),
-        publishedAt: item.pubDate ? new Date(item.pubDate) : new Date(),
-        source: 'podcast' as const,
-        sport: podcast.sport,
-      }));
+      .map((item) => {
+        // Use Apple Podcasts URL if available, otherwise use episode link or podcast website
+        let episodeUrl: string;
+        
+        if (podcast.applePodcastsUrl) {
+          // Link to the main podcast page on Apple Podcasts
+          // Note: We can't link to specific episodes without the episode ID from Apple
+          episodeUrl = podcast.applePodcastsUrl;
+        } else {
+          // Fallback: use item.link if it's valid, otherwise use podcast website
+          episodeUrl = item.link;
+          
+          // If item.link is the RSS feed URL or doesn't exist, use the podcast's main website
+          if (!episodeUrl || episodeUrl === podcast.url || episodeUrl.includes('.xml') || episodeUrl.includes('/rss/')) {
+            episodeUrl = feed.link || podcast.url;
+          }
+        }
+        
+        return {
+          id: `podcast-${item.guid || item.link || item.title}`,
+          title: decodeHtmlEntities(item.title || 'Untitled Episode'),
+          description: decodeHtmlEntities(item.contentSnippet || item.content || ''),
+          url: episodeUrl,
+          thumbnail: item.itunes?.image || feed.image?.url,
+          author: decodeHtmlEntities(feed.title || podcast.name),
+          publishedAt: item.pubDate ? new Date(item.pubDate) : new Date(),
+          source: 'podcast' as const,
+          sport: podcast.sport,
+        };
+      });
 
     console.log(`Podcast: Fetched ${items.length} episodes from ${podcast.name}`);
     return items;

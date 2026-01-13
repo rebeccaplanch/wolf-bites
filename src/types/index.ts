@@ -24,6 +24,7 @@ export interface PodcastFeed {
   url: string;
   name: string;
   sport: SportType;
+  applePodcastsUrl?: string; // Apple Podcasts URL for the podcast
 }
 
 export interface SourcesConfig {
