@@ -86,8 +86,8 @@ export default function ContentFeed() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8 gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-1 sm:mb-2">
-            Wolf Bites
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold italic text-gray-900 mb-1 sm:mb-2" style={{ fontFamily: 'Impact, "Arial Black", sans-serif' }}>
+            WOLF BITES
           </h1>
           <p className="text-sm sm:text-base lg:text-lg text-gray-600">
             Your NC State Sports News Hub
