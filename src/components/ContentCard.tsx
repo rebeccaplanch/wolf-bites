@@ -40,7 +40,7 @@ export default function ContentCard({ item }: ContentCardProps) {
           {/* Title and Description */}
           <div className="flex-1 min-w-0">
             {/* Title */}
-            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3 line-clamp-2 leading-snug">
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1 sm:mb-1.5 line-clamp-2 leading-snug">
               {item.title}
             </h3>
 
@@ -58,7 +58,8 @@ export default function ContentCard({ item }: ContentCardProps) {
 
         {/* Author and Timestamp - Full Width */}
         <div className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">
-          <span className="truncate">{formatDistanceToNow(item.publishedAt, { addSuffix: true })} by {item.author}</span>
+          <div className="truncate">by {item.author}</div>
+          <div>{formatDistanceToNow(item.publishedAt, { addSuffix: true })}</div>
         </div>
 
         {/* Divider */}
