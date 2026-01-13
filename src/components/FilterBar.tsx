@@ -18,7 +18,7 @@ export default function FilterBar({
   onSourceChange,
 }: FilterBarProps) {
   return (
-    <div className="bg-white rounded-lg shadow-md p-3 sm:p-4 mb-4 sm:mb-6">
+    <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-6 mb-4 sm:mb-6">
       <div>
         <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
           Source
