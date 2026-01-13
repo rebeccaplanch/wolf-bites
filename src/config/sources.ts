@@ -19,29 +19,52 @@ import { SourcesConfig } from '@/types';
 
 export const sources: SourcesConfig = {
   youtube: [
-    // NC State Football YouTube Channels
+    // ========================================
+    // IMPORTANT: Replace PLACEHOLDER IDs below with actual channel IDs
+    // To find channel IDs:
+    // 1. Go to youtube.com/@ChannelHandle
+    // 2. Right-click → View Page Source (Ctrl+U)
+    // 3. Search for "channelId" (Ctrl+F)
+    // 4. Copy the ID (starts with UC...)
+    // ========================================
+
+    // 247Sports NC State Coverage
+    // Channel: youtube.com/@NCStateWolfpack247Sports
     {
-      id: 'UCjyDoANM6X-zK_PnSCD-iEQ',
-      name: 'NC State Athletics',
+      id: 'REPLACE_WITH_247SPORTS_CHANNEL_ID', // TODO: Get ID from @NCStateWolfpack247Sports
+      name: '247Sports NC State',
       sport: 'football',
     },
     {
-      id: 'UCjyDoANM6X-zK_PnSCD-iEQ',
-      name: 'NC State Athletics',
+      id: 'REPLACE_WITH_247SPORTS_CHANNEL_ID', // TODO: Same ID as above
+      name: '247Sports NC State',
       sport: 'basketball',
     },
     {
-      id: 'UCjyDoANM6X-zK_PnSCD-iEQ',
-      name: 'NC State Athletics',
+      id: 'REPLACE_WITH_247SPORTS_CHANNEL_ID', // TODO: Same ID as above
+      name: '247Sports NC State',
       sport: 'baseball',
     },
+
+    // Inside Pack Sports
+    // Channel: youtube.com/@InsidePackSports
+    {
+      id: 'REPLACE_WITH_INSIDEPACK_CHANNEL_ID', // TODO: Get ID from @InsidePackSports
+      name: 'Inside Pack Sports',
+      sport: 'football',
+    },
+    {
+      id: 'REPLACE_WITH_INSIDEPACK_CHANNEL_ID', // TODO: Same ID as above
+      name: 'Inside Pack Sports',
+      sport: 'basketball',
+    },
+    {
+      id: 'REPLACE_WITH_INSIDEPACK_CHANNEL_ID', // TODO: Same ID as above
+      name: 'Inside Pack Sports',
+      sport: 'baseball',
+    },
+
     // Add more YouTube channels here
-    // Example:
-    // {
-    //   id: 'CHANNEL_ID_HERE',
-    //   name: 'Pack Pride',
-    //   sport: 'football',
-    // },
   ],
 
   twitter: [
