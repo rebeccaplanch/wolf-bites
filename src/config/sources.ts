@@ -31,17 +31,17 @@ export const sources: SourcesConfig = {
     // 247Sports NC State Coverage
     // Channel: youtube.com/@NCStateWolfpack247Sports
     {
-      id: 'REPLACE_WITH_247SPORTS_CHANNEL_ID', // TODO: Get ID from @NCStateWolfpack247Sports
+      id: 'UCl_MWtDgqcNRo4MXhVd3z0w',
       name: '247Sports NC State',
       sport: 'football',
     },
     {
-      id: 'REPLACE_WITH_247SPORTS_CHANNEL_ID', // TODO: Same ID as above
+      id: 'UCl_MWtDgqcNRo4MXhVd3z0w',
       name: '247Sports NC State',
       sport: 'basketball',
     },
     {
-      id: 'REPLACE_WITH_247SPORTS_CHANNEL_ID', // TODO: Same ID as above
+      id: 'UCl_MWtDgqcNRo4MXhVd3z0w',
       name: '247Sports NC State',
       sport: 'baseball',
     },
@@ -49,17 +49,17 @@ export const sources: SourcesConfig = {
     // Inside Pack Sports
     // Channel: youtube.com/@InsidePackSports
     {
-      id: 'REPLACE_WITH_INSIDEPACK_CHANNEL_ID', // TODO: Get ID from @InsidePackSports
+      id: 'UC-gveie5Hvn2O-57sOAJjlg',
       name: 'Inside Pack Sports',
       sport: 'football',
     },
     {
-      id: 'REPLACE_WITH_INSIDEPACK_CHANNEL_ID', // TODO: Same ID as above
+      id: 'UC-gveie5Hvn2O-57sOAJjlg',
       name: 'Inside Pack Sports',
       sport: 'basketball',
     },
     {
-      id: 'REPLACE_WITH_INSIDEPACK_CHANNEL_ID', // TODO: Same ID as above
+      id: 'UC-gveie5Hvn2O-57sOAJjlg',
       name: 'Inside Pack Sports',
       sport: 'baseball',
     },
