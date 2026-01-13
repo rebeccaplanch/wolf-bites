@@ -6,8 +6,8 @@ interface ContentCardProps {
 }
 
 const sourceIcons = {
-  youtube: 'play_circle',
-  podcast: 'podcast',
+  youtube: 'movie',
+  podcast: 'podcasts',
 };
 
 const sourceColors = {

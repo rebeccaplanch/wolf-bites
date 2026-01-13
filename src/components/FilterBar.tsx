@@ -9,8 +9,8 @@ interface FilterBarProps {
 
 const sources: Array<{ value: ContentSource | 'all'; label: string; icon: string }> = [
   { value: 'all', label: 'All Sources', icon: 'apps' },
-  { value: 'youtube', label: 'YouTube', icon: 'play_circle' },
-  { value: 'podcast', label: 'Podcasts', icon: 'podcast' },
+  { value: 'youtube', label: 'YouTube', icon: 'movie' },
+  { value: 'podcast', label: 'Podcasts', icon: 'podcasts' },
 ];
 
 export default function FilterBar({
