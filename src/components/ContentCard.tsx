@@ -23,39 +23,35 @@ export default function ContentCard({ item }: ContentCardProps) {
       href={item.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="block bg-white rounded-lg shadow-md hover:shadow-xl active:shadow-lg transition-shadow duration-200 overflow-hidden touch-manipulation"
+      className="block bg-white rounded-2xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all duration-200 overflow-hidden touch-manipulation"
     >
-      <div className="p-3 sm:p-4">
-        <div className="flex items-start gap-2 sm:gap-3">
-          {item.thumbnail && (
-            <img
-              src={item.thumbnail}
-              alt={item.title}
-              className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 object-cover rounded-lg flex-shrink-0"
-            />
-          )}
-          <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-sm sm:text-base text-gray-900 mb-1 line-clamp-2 leading-tight">
-              {item.title}
-            </h3>
-            {item.description && (
-              <p className="text-xs sm:text-sm text-gray-600 mb-2 line-clamp-2 leading-snug">
-                {item.description}
-              </p>
-            )}
-            <div className="flex items-center justify-between text-xs text-gray-500 flex-wrap gap-1 mb-1.5 sm:mb-2">
-              <span className="truncate max-w-[50%]">{item.author}</span>
-              <span className="flex-shrink-0">{formatDistanceToNow(item.publishedAt, { addSuffix: true })}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className={`inline-flex items-center gap-1 px-2 py-0.5 sm:py-1 rounded-full text-xs font-medium ${sourceColors[item.source]}`}>
-                <span className="material-symbols-outlined text-xs">{sourceIcon}</span>
-                <span className="hidden sm:inline">{item.source}</span>
-                <span className="sm:hidden">{item.source === 'youtube' ? 'YouTube' : 'Podcast'}</span>
-              </span>
-            </div>
-          </div>
-          <span className="material-symbols-outlined text-gray-400 flex-shrink-0 text-sm sm:text-base">open_in_new</span>
+      <div className="p-4 sm:p-6">
+        {/* Source Badge */}
+        <div className="flex items-center gap-2 mb-3 sm:mb-4">
+          <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] sm:text-xs font-medium ${sourceColors[item.source]}`}>
+            <span className="material-symbols-outlined text-xs sm:text-sm">{sourceIcon}</span>
+            {item.source === 'youtube' ? 'YouTube' : 'Podcast'}
+          </span>
+        </div>
+
+        {/* Title */}
+        <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3 line-clamp-2 leading-snug">
+          {item.title}
+        </h3>
+
+        {/* Description */}
+        {item.description && (
+          <p className="text-[10px] sm:text-sm text-gray-600 mb-4 sm:mb-6 line-clamp-2 leading-relaxed">
+            {item.description}
+          </p>
+        )}
+
+        {/* Divider */}
+        <div className="border-t border-gray-100 mb-3 sm:mb-4"></div>
+
+        {/* Author and Timestamp */}
+        <div className="flex items-center justify-between text-[10px] sm:text-xs text-gray-500">
+          <span className="truncate">{formatDistanceToNow(item.publishedAt, { addSuffix: true })} by {item.author}</span>
         </div>
       </div>
     </a>
