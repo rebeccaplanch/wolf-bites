@@ -25,11 +25,13 @@ export async function fetchYouTubeVideos(
   const apiKey = process.env.YOUTUBE_API_KEY;
 
   if (!apiKey) {
-    console.warn('YouTube API key not configured');
+    console.error(`[YouTube] API key not configured for channel: ${channel.name} (${channel.id})`);
+    console.error('[YouTube] Make sure YOUTUBE_API_KEY is set in Vercel environment variables');
     return [];
   }
 
   try {
+    // Build URL with query parameters
     const url = `${YOUTUBE_API_BASE}/search?` +
       `part=snippet` +
       `&channelId=${channel.id}` +
@@ -37,6 +39,9 @@ export async function fetchYouTubeVideos(
       `&order=date` +
       `&type=video` +
       `&key=${apiKey}`;
+    
+    console.log(`[YouTube] Fetching videos from ${channel.name} (${channel.id})`);
+    console.log(`[YouTube] API Key present: ${apiKey.substring(0, 10)}... (length: ${apiKey.length})`);
 
     const response = await fetch(url, {
       next: { revalidate: 300 }, // Cache for 5 minutes
@@ -44,12 +49,38 @@ export async function fetchYouTubeVideos(
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error(`YouTube API error: ${response.status}`, errorText);
+      let errorData;
+      try {
+        errorData = JSON.parse(errorText);
+      } catch {
+        errorData = { message: errorText };
+      }
+      
+      console.error(`[YouTube] API error for ${channel.name}:`, {
+        status: response.status,
+        statusText: response.statusText,
+        error: errorData,
+        url: url.replace(apiKey, 'REDACTED'),
+      });
+      
+      // Return empty array but log the error for debugging
       return [];
     }
 
     const data = await response.json();
-    console.log(`YouTube: Fetched ${data.items?.length || 0} videos from ${channel.name}`);
+    
+    // Check for API errors in response
+    if (data.error) {
+      console.error(`[YouTube] API returned error for ${channel.name}:`, data.error);
+      return [];
+    }
+
+    const videoCount = data.items?.length || 0;
+    console.log(`[YouTube] Successfully fetched ${videoCount} videos from ${channel.name}`);
+
+    if (videoCount === 0) {
+      console.warn(`[YouTube] No videos found for channel ${channel.name} (${channel.id})`);
+    }
 
     return (data.items || []).map((item: YouTubeVideo) => ({
       id: `youtube-${item.id.videoId}`,
@@ -63,7 +94,11 @@ export async function fetchYouTubeVideos(
       sport: channel.sport,
     }));
   } catch (error) {
-    console.error('Error fetching YouTube videos:', error);
+    console.error(`[YouTube] Exception fetching videos from ${channel.name}:`, error);
+    if (error instanceof Error) {
+      console.error(`[YouTube] Error message: ${error.message}`);
+      console.error(`[YouTube] Error stack: ${error.stack}`);
+    }
     return [];
   }
 }
@@ -79,11 +114,24 @@ export async function fetchAllYouTubeVideos(
     ? channels.filter((c) => c.sport === sport)
     : channels;
 
-  const results = await Promise.all(
-    filteredChannels.map((channel) => fetchYouTubeVideos(channel, 5))
+  // Deduplicate channels by ID to avoid fetching the same channel multiple times
+  const uniqueChannels = Array.from(
+    new Map(filteredChannels.map((channel) => [channel.id, channel])).values()
   );
 
-  return results.flat().sort((a, b) =>
+  const results = await Promise.all(
+    uniqueChannels.map((channel) => fetchYouTubeVideos(channel, 5))
+  );
+
+  // Flatten results and deduplicate by video ID
+  const allVideos = results.flat();
+  
+  // Use Map to deduplicate by video ID (keep first occurrence)
+  const uniqueVideos = Array.from(
+    new Map(allVideos.map((video) => [video.id, video])).values()
+  );
+
+  return uniqueVideos.sort((a, b) =>
     b.publishedAt.getTime() - a.publishedAt.getTime()
   );
 }

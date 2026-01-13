@@ -27,23 +27,15 @@ export const sources: SourcesConfig = {
     // 3. Search for "channelId" (Ctrl+F)
     // 4. Copy the ID (starts with UC...)
     // ========================================
+    // Note: Each channel should only be listed once to avoid duplicates.
+    // Videos are deduplicated automatically by video ID.
 
     // 247Sports NC State Coverage
     // Channel: youtube.com/@NCStateWolfpack247Sports
     {
       id: 'UCl_MWtDgqcNRo4MXhVd3z0w',
       name: '247Sports NC State',
-      sport: 'football',
-    },
-    {
-      id: 'UCl_MWtDgqcNRo4MXhVd3z0w',
-      name: '247Sports NC State',
-      sport: 'basketball',
-    },
-    {
-      id: 'UCl_MWtDgqcNRo4MXhVd3z0w',
-      name: '247Sports NC State',
-      sport: 'baseball',
+      sport: 'football', // Sport tag for filtering (videos from this channel may cover multiple sports)
     },
 
     // Inside Pack Sports
@@ -51,17 +43,7 @@ export const sources: SourcesConfig = {
     {
       id: 'UC-gveie5Hvn2O-57sOAJjlg',
       name: 'Inside Pack Sports',
-      sport: 'football',
-    },
-    {
-      id: 'UC-gveie5Hvn2O-57sOAJjlg',
-      name: 'Inside Pack Sports',
-      sport: 'basketball',
-    },
-    {
-      id: 'UC-gveie5Hvn2O-57sOAJjlg',
-      name: 'Inside Pack Sports',
-      sport: 'baseball',
+      sport: 'football', // Sport tag for filtering (videos from this channel may cover multiple sports)
     },
 
     // Add more YouTube channels here

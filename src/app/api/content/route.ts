@@ -14,7 +14,14 @@ export async function GET(request: NextRequest) {
     const sport = searchParams.get('sport') as SportType | null;
     const sourceType = searchParams.get('source');
 
-    console.log(`Fetching content - Sport: ${sport || 'all'}, Source: ${sourceType || 'all'}`);
+    console.log(`[API] Fetching content - Sport: ${sport || 'all'}, Source: ${sourceType || 'all'}`);
+    
+    // Check environment variables
+    const youtubeApiKey = process.env.YOUTUBE_API_KEY;
+    console.log(`[API] YouTube API Key configured: ${!!youtubeApiKey}`);
+    if (!youtubeApiKey) {
+      console.warn('[API] WARNING: YOUTUBE_API_KEY is not set in environment variables');
+    }
 
     // Fetch from all sources in parallel
     const [youtubeContent, twitterContent, podcastContent] = await Promise.all([
@@ -29,6 +36,8 @@ export async function GET(request: NextRequest) {
         : [],
     ]);
 
+    console.log(`[API] Content fetched - YouTube: ${youtubeContent.length}, Twitter: ${twitterContent.length}, Podcasts: ${podcastContent.length}`);
+
     // Combine and sort all content by date
     const allContent = [
       ...youtubeContent,
@@ -36,16 +45,25 @@ export async function GET(request: NextRequest) {
       ...podcastContent,
     ].sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime());
 
-    console.log(`Found ${allContent.length} total items`);
+    console.log(`[API] Found ${allContent.length} total items`);
 
     return NextResponse.json({
       success: true,
       count: allContent.length,
       items: allContent,
       timestamp: new Date().toISOString(),
+      breakdown: {
+        youtube: youtubeContent.length,
+        twitter: twitterContent.length,
+        podcasts: podcastContent.length,
+      },
     });
   } catch (error) {
-    console.error('Error in content API:', error);
+    console.error('[API] Error in content API:', error);
+    if (error instanceof Error) {
+      console.error('[API] Error message:', error.message);
+      console.error('[API] Error stack:', error.stack);
+    }
     return NextResponse.json(
       {
         success: false,

@@ -21,8 +21,27 @@ export default function ContentFeed() {
       if (selectedSport !== 'all') params.append('sport', selectedSport);
       if (selectedSource !== 'all') params.append('source', selectedSource);
 
+      console.log('[Frontend] Fetching content from:', `/api/content?${params.toString()}`);
+      
       const response = await fetch(`/api/content?${params.toString()}`);
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        let errorData;
+        try {
+          errorData = JSON.parse(errorText);
+        } catch {
+          errorData = { message: errorText };
+        }
+        throw new Error(errorData.message || `HTTP ${response.status}: ${response.statusText}`);
+      }
+
       const data = await response.json();
+      console.log('[Frontend] API response:', {
+        success: data.success,
+        count: data.count,
+        breakdown: data.breakdown,
+      });
 
       if (data.success) {
         // Convert date strings back to Date objects
@@ -31,12 +50,22 @@ export default function ContentFeed() {
           publishedAt: new Date(item.publishedAt),
         }));
         setItems(itemsWithDates);
+        
+        // Log breakdown if available
+        if (data.breakdown) {
+          console.log('[Frontend] Content breakdown:', data.breakdown);
+          if (data.count === 0) {
+            console.warn('[Frontend] No content found. Check API logs for details.');
+          }
+        }
       } else {
         setError(data.message || 'Failed to fetch content');
+        console.error('[Frontend] API returned error:', data);
       }
     } catch (err) {
-      setError('Network error. Please check your connection.');
-      console.error('Fetch error:', err);
+      const errorMessage = err instanceof Error ? err.message : 'Network error. Please check your connection.';
+      setError(errorMessage);
+      console.error('[Frontend] Fetch error:', err);
     } finally {
       setLoading(false);
       setRefreshing(false);
