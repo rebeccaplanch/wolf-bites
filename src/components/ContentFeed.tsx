@@ -86,7 +86,7 @@ export default function ContentFeed() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8 gap-4">
         <div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold italic text-gray-900 mb-1 sm:mb-2" style={{ fontFamily: '"Squada One", Impact, "Arial Black", sans-serif' }}>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold italic text-gray-900 mb-1 sm:mb-2" style={{ fontFamily: '"Squada One", Impact, "Arial Black", sans-serif', letterSpacing: '-0.03em' }}>
             WOLF BITES
           </h1>
           <p className="text-sm sm:text-base lg:text-lg text-gray-600">
