@@ -37,15 +37,7 @@ export default function ContentCard({ item }: ContentCardProps) {
           )}
 
           {/* Content */}
-          <div className="flex-1 min-w-0">
-            {/* Source Badge */}
-            <div className="flex items-center gap-2 mb-2 sm:mb-3">
-              <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] sm:text-xs font-medium ${sourceColors[item.source]}`}>
-                <span className="material-symbols-outlined text-xs sm:text-sm">{sourceIcon}</span>
-                {item.source === 'youtube' ? 'YouTube' : 'Podcast'}
-              </span>
-            </div>
-
+          <div className="flex-1 min-w-0" style={{ fontFamily: '"Source Sans 3", sans-serif' }}>
             {/* Title */}
             <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3 line-clamp-2 leading-snug">
               {item.title}
@@ -62,8 +54,19 @@ export default function ContentCard({ item }: ContentCardProps) {
             <div className="border-t border-gray-100 mb-3 sm:mb-4"></div>
 
             {/* Author and Timestamp */}
-            <div className="flex items-center justify-between text-[10px] sm:text-xs text-gray-500">
+            <div className="text-[10px] sm:text-xs text-gray-500 mb-3 sm:mb-4">
               <span className="truncate">{formatDistanceToNow(item.publishedAt, { addSuffix: true })} by {item.author}</span>
+            </div>
+
+            {/* Divider */}
+            <div className="border-t border-gray-100 mb-2 sm:mb-3"></div>
+
+            {/* Source Badge */}
+            <div className="flex items-center gap-2">
+              <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[10px] sm:text-xs font-medium ${sourceColors[item.source]}`}>
+                <span className="material-symbols-outlined text-xs sm:text-sm">{sourceIcon}</span>
+                {item.source === 'youtube' ? 'YouTube' : 'Podcast'}
+              </span>
             </div>
           </div>
         </div>
