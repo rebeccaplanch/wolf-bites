@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sources } from '@/config/sources';
 import { fetchAllYouTubeVideos } from '@/lib/youtube';
-import { fetchAllTweets } from '@/lib/twitter';
 import { fetchAllPodcasts } from '@/lib/podcasts';
 
 export const dynamic = 'force-dynamic';
@@ -22,24 +21,20 @@ export async function GET(request: NextRequest) {
     }
 
     // Fetch from all sources in parallel (no sport filtering)
-    const [youtubeContent, twitterContent, podcastContent] = await Promise.all([
+    const [youtubeContent, podcastContent] = await Promise.all([
       !sourceType || sourceType === 'youtube'
         ? fetchAllYouTubeVideos(sources.youtube)
-        : [],
-      !sourceType || sourceType === 'twitter'
-        ? fetchAllTweets(sources.twitter)
         : [],
       !sourceType || sourceType === 'podcast'
         ? fetchAllPodcasts(sources.podcasts)
         : [],
     ]);
 
-    console.log(`[API] Content fetched - YouTube: ${youtubeContent.length}, Twitter: ${twitterContent.length}, Podcasts: ${podcastContent.length}`);
+    console.log(`[API] Content fetched - YouTube: ${youtubeContent.length}, Podcasts: ${podcastContent.length}`);
 
     // Combine and sort all content by date
     const allContent = [
       ...youtubeContent,
-      ...twitterContent,
       ...podcastContent,
     ].sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime());
 
@@ -52,7 +47,6 @@ export async function GET(request: NextRequest) {
       timestamp: new Date().toISOString(),
       breakdown: {
         youtube: youtubeContent.length,
-        twitter: twitterContent.length,
         podcasts: podcastContent.length,
       },
     });

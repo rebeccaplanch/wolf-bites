@@ -8,13 +8,11 @@ import { SourcesConfig } from '@/types';
  * 2. View page source (Ctrl+U)
  * 3. Search for "channelId"
  *
- * To find Twitter usernames:
- * Just use the @ handle without the @
- *
  * To find Podcast RSS feeds:
  * 1. Find the podcast on Apple Podcasts
  * 2. Right-click and "Copy Link"
  * 3. Use a service like https://podcasturl.com to get the RSS feed
+ * 4. Or use https://rss.apple.com/ to convert Apple Podcasts URLs to RSS feeds
  */
 
 export const sources: SourcesConfig = {
@@ -49,70 +47,19 @@ export const sources: SourcesConfig = {
     // Add more YouTube channels here
   ],
 
-  twitter: [
-    // NC State Football Twitter Accounts
-    {
-      username: 'PackFootball',
-      name: 'NC State Football',
-      sport: 'football',
-    },
-    {
-      username: 'PackMensBball',
-      name: 'NC State Men\'s Basketball',
-      sport: 'basketball',
-    },
-    {
-      username: 'NCStateBaseball',
-      name: 'NC State Baseball',
-      sport: 'baseball',
-    },
-    {
-      username: 'TheWolfpacker',
-      name: 'The Wolfpacker',
-      sport: 'football',
-    },
-    {
-      username: 'TheWolfpacker',
-      name: 'The Wolfpacker',
-      sport: 'basketball',
-    },
-    {
-      username: 'TheWolfpacker',
-      name: 'The Wolfpacker',
-      sport: 'baseball',
-    },
-    // Add more Twitter accounts here
-    // Example:
-    // {
-    //   username: 'PackPride247',
-    //   name: 'Pack Pride 247',
-    //   sport: 'football',
-    // },
-  ],
-
   podcasts: [
-    // NC State Sports Podcasts (RSS feeds)
-    // Note: You'll need to find the actual RSS feed URLs
+    // Pack Power - NC State Wolfpack Podcasts on 247Sports
     {
-      url: 'https://feeds.megaphone.fm/packedhouse',
-      name: 'Packed House Podcast',
+      url: 'https://feeds.megaphone.fm/pack-pride',
+      name: 'Pack Power - NC State Wolfpack Podcasts on 247Sports',
       sport: 'football',
     },
+    // Inside Pack Sports Live
     {
-      url: 'https://feeds.megaphone.fm/packedhouse',
-      name: 'Packed House Podcast',
-      sport: 'basketball',
+      url: 'https://rss.libsyn.com/shows/102525/destinations/544501.xml',
+      name: 'Inside Pack Sports Live',
+      sport: 'football',
     },
-    // Add more podcast RSS feeds here
-    // To find RSS feeds:
-    // 1. Find podcast on Apple Podcasts
-    // 2. Use https://podcasturl.com or similar service
-    // Example:
-    // {
-    //   url: 'https://feeds.example.com/ncstate-sports',
-    //   name: 'NC State Sports Talk',
-    //   sport: 'football',
-    // },
   ],
 };
 
@@ -123,10 +70,6 @@ export const RATE_LIMITS = {
   youtube: {
     maxRequestsPerDay: 10000, // YouTube API quota
     cooldownMs: 1000, // 1 second between requests
-  },
-  twitter: {
-    maxRequestsPerMonth: 500000, // Twitter API limit (free tier much lower)
-    cooldownMs: 1000,
   },
   podcasts: {
     cooldownMs: 5000, // 5 seconds between RSS fetches

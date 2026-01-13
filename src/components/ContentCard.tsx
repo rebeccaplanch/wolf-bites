@@ -1,6 +1,6 @@
 import { ContentItem } from '@/types';
 import { formatDistanceToNow } from 'date-fns';
-import { Youtube, Twitter, Mic, ExternalLink } from 'lucide-react';
+import { Youtube, Mic, ExternalLink } from 'lucide-react';
 
 interface ContentCardProps {
   item: ContentItem;
@@ -8,13 +8,11 @@ interface ContentCardProps {
 
 const sourceIcons = {
   youtube: Youtube,
-  twitter: Twitter,
   podcast: Mic,
 };
 
 const sourceColors = {
   youtube: 'bg-red-100 text-red-600',
-  twitter: 'bg-blue-100 text-blue-600',
   podcast: 'bg-purple-100 text-purple-600',
 };
 

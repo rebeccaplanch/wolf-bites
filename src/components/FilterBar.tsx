@@ -1,7 +1,7 @@
 'use client';
 
 import { ContentSource } from '@/types';
-import { Youtube, Twitter, Mic, Grid } from 'lucide-react';
+import { Youtube, Mic, Grid } from 'lucide-react';
 
 interface FilterBarProps {
   selectedSource: ContentSource | 'all';
@@ -11,7 +11,6 @@ interface FilterBarProps {
 const sources: Array<{ value: ContentSource | 'all'; label: string; icon: any }> = [
   { value: 'all', label: 'All Sources', icon: Grid },
   { value: 'youtube', label: 'YouTube', icon: Youtube },
-  { value: 'twitter', label: 'Twitter', icon: Twitter },
   { value: 'podcast', label: 'Podcasts', icon: Mic },
 ];
 
