@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { ContentItem, ContentSource } from '@/types';
 import ContentCard from './ContentCard';
 import FilterBar from './FilterBar';
-import { RefreshCw, AlertCircle } from 'lucide-react';
 
 export default function ContentFeed() {
   const [items, setItems] = useState<ContentItem[]>([]);
@@ -98,7 +97,7 @@ export default function ContentFeed() {
           disabled={refreshing}
           className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-ncstate-red text-white rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm sm:text-base w-full sm:w-auto"
         >
-          <RefreshCw size={16} className={refreshing ? 'animate-spin' : ''} />
+          <span className={`material-symbols-outlined text-base ${refreshing ? 'animate-spin' : ''}`}>refresh</span>
           <span className="sm:hidden">{refreshing ? '...' : 'Refresh'}</span>
           <span className="hidden sm:inline">{refreshing ? 'Refreshing...' : 'Refresh'}</span>
         </button>
@@ -113,7 +112,7 @@ export default function ContentFeed() {
       {/* Loading State */}
       {loading && (
         <div className="flex items-center justify-center py-8 sm:py-12">
-          <RefreshCw className="animate-spin text-ncstate-red" size={24} />
+          <span className="material-symbols-outlined animate-spin text-ncstate-red text-2xl">progress_activity</span>
           <span className="ml-3 text-sm sm:text-base text-gray-600">Loading content...</span>
         </div>
       )}
@@ -122,7 +121,7 @@ export default function ContentFeed() {
       {error && (
         <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
           <div className="flex items-center gap-2 text-red-800">
-            <AlertCircle size={20} />
+            <span className="material-symbols-outlined text-xl">error</span>
             <p>{error}</p>
           </div>
         </div>

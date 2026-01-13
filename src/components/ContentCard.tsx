@@ -1,14 +1,13 @@
 import { ContentItem } from '@/types';
 import { formatDistanceToNow } from 'date-fns';
-import { Youtube, Mic, ExternalLink } from 'lucide-react';
 
 interface ContentCardProps {
   item: ContentItem;
 }
 
 const sourceIcons = {
-  youtube: Youtube,
-  podcast: Mic,
+  youtube: 'play_circle',
+  podcast: 'podcast',
 };
 
 const sourceColors = {
@@ -17,7 +16,7 @@ const sourceColors = {
 };
 
 export default function ContentCard({ item }: ContentCardProps) {
-  const SourceIcon = sourceIcons[item.source];
+  const sourceIcon = sourceIcons[item.source];
 
   return (
     <a
@@ -38,7 +37,7 @@ export default function ContentCard({ item }: ContentCardProps) {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1.5 sm:mb-2">
               <span className={`inline-flex items-center gap-1 px-2 py-0.5 sm:py-1 rounded-full text-xs font-medium ${sourceColors[item.source]}`}>
-                <SourceIcon size={10} className="sm:w-3 sm:h-3" />
+                <span className="material-symbols-outlined text-xs">{sourceIcon}</span>
                 <span className="hidden sm:inline">{item.source}</span>
                 <span className="sm:hidden">{item.source === 'youtube' ? 'YT' : 'Pod'}</span>
               </span>
@@ -56,7 +55,7 @@ export default function ContentCard({ item }: ContentCardProps) {
               <span className="flex-shrink-0">{formatDistanceToNow(item.publishedAt, { addSuffix: true })}</span>
             </div>
           </div>
-          <ExternalLink size={14} className="text-gray-400 flex-shrink-0 sm:w-4 sm:h-4" />
+          <span className="material-symbols-outlined text-gray-400 flex-shrink-0 text-sm sm:text-base">open_in_new</span>
         </div>
       </div>
     </a>
