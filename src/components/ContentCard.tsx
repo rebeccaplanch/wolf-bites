@@ -43,16 +43,16 @@ export default function ContentCard({ item }: ContentCardProps) {
                 {item.description}
               </p>
             )}
-            <div className="flex items-center gap-2 mb-1.5 sm:mb-2">
+            <div className="flex items-center justify-between text-xs text-gray-500 flex-wrap gap-1 mb-1.5 sm:mb-2">
+              <span className="truncate max-w-[50%]">{item.author}</span>
+              <span className="flex-shrink-0">{formatDistanceToNow(item.publishedAt, { addSuffix: true })}</span>
+            </div>
+            <div className="flex items-center gap-2">
               <span className={`inline-flex items-center gap-1 px-2 py-0.5 sm:py-1 rounded-full text-xs font-medium ${sourceColors[item.source]}`}>
                 <span className="material-symbols-outlined text-xs">{sourceIcon}</span>
                 <span className="hidden sm:inline">{item.source}</span>
                 <span className="sm:hidden">{item.source === 'youtube' ? 'YouTube' : 'Podcast'}</span>
               </span>
-            </div>
-            <div className="flex items-center justify-between text-xs text-gray-500 flex-wrap gap-1">
-              <span className="truncate max-w-[50%]">{item.author}</span>
-              <span className="flex-shrink-0">{formatDistanceToNow(item.publishedAt, { addSuffix: true })}</span>
             </div>
           </div>
           <span className="material-symbols-outlined text-gray-400 flex-shrink-0 text-sm sm:text-base">open_in_new</span>
