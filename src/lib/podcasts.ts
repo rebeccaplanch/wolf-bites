@@ -27,11 +27,13 @@ export async function fetchPodcastEpisodes(
           episodeUrl = podcast.applePodcastsUrl;
         } else {
           // Fallback: use item.link if it's valid, otherwise use podcast website
-          episodeUrl = item.link;
+          const itemLink = item.link;
           
-          // If item.link is the RSS feed URL or doesn't exist, use the podcast's main website
-          if (!episodeUrl || episodeUrl === podcast.url || episodeUrl.includes('.xml') || episodeUrl.includes('/rss/')) {
+          // If item.link is undefined, the RSS feed URL, or an XML file, use the podcast's main website
+          if (!itemLink || itemLink === podcast.url || itemLink.includes('.xml') || itemLink.includes('/rss/')) {
             episodeUrl = feed.link || podcast.url;
+          } else {
+            episodeUrl = itemLink;
           }
         }
         
