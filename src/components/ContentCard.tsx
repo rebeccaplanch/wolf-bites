@@ -16,12 +16,6 @@ const sourceColors = {
   podcast: 'bg-purple-100 text-purple-600',
 };
 
-const sportColors = {
-  football: 'bg-green-100 text-green-800',
-  basketball: 'bg-orange-100 text-orange-800',
-  baseball: 'bg-blue-100 text-blue-800',
-};
-
 export default function ContentCard({ item }: ContentCardProps) {
   const SourceIcon = sourceIcons[item.source];
 
@@ -46,9 +40,6 @@ export default function ContentCard({ item }: ContentCardProps) {
               <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${sourceColors[item.source]}`}>
                 <SourceIcon size={12} />
                 {item.source}
-              </span>
-              <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${sportColors[item.sport]}`}>
-                {item.sport}
               </span>
             </div>
             <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2">
