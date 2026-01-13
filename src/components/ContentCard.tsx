@@ -59,14 +59,16 @@ export default function ContentCard({ item }: ContentCardProps) {
         {/* Author and Timestamp - Full Width */}
         <div className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">
           <div className="truncate">by {item.author}</div>
-          <div>{formatDistanceToNow(item.publishedAt, { addSuffix: true })}</div>
+          <div className="uppercase tracking-wide" style={{ fontFamily: '"Roboto Mono", monospace' }}>
+            {formatDistanceToNow(item.publishedAt, { addSuffix: true })}
+          </div>
         </div>
 
         {/* Divider */}
         <div className="border-t border-gray-100 mb-2 sm:mb-3"></div>
 
         {/* Source Badge - Full Width */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-end gap-2">
           <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-xs sm:text-sm font-medium ${sourceColors[item.source]}`}>
             <span className="material-symbols-outlined text-xs sm:text-sm">{sourceIcon}</span>
             {item.source === 'youtube' ? 'YouTube' : 'Podcast'}
